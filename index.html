@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TKP Hospitality Awards の自薦・他薦文を短い質問から作成する補助ツール">
+  <title>TKP Hospitality Awards 応募サポート</title>
+  <style>
+    :root {
+      --red: #a10c18;
+      --red-dark: #760812;
+      --navy: #10263b;
+      --ink: #1d2730;
+      --muted: #66727d;
+      --line: #dfe4e8;
+      --paper: #fffdf9;
+      --cream: #f7f1e7;
+      --success: #16734a;
+      --warn: #9a5a00;
+      --shadow: 0 16px 42px rgba(30, 35, 40, .1);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 3%, rgba(161, 12, 24, .08), transparent 28%),
+        radial-gradient(circle at 92% 8%, rgba(16, 38, 59, .08), transparent 25%),
+        #f4f6f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+      line-height: 1.65;
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button, .button-link { touch-action: manipulation; }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px 0 26px;
+      color: #fff;
+      background: linear-gradient(125deg, var(--red-dark), var(--red) 58%, #c22632);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -150px;
+      width: 420px;
+      height: 420px;
+      border: 64px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+    .hero-grid { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .eyebrow { margin: 0 0 5px; font-size: 13px; font-weight: 800; letter-spacing: .12em; opacity: .84; }
+    h1 { margin: 0; font-size: clamp(25px, 4vw, 42px); line-height: 1.18; }
+    .hero p { max-width: 740px; margin: 10px 0 0; opacity: .92; }
+    .privacy {
+      flex: 0 0 auto;
+      padding: 9px 13px;
+      border: 1px solid rgba(255,255,255,.38);
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    main { padding: 28px 0 56px; }
+    .notice {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+      padding: 14px 17px;
+      border: 1px solid #e9dcc5;
+      border-radius: 14px;
+      background: #fffaf0;
+      color: #5a4728;
+      font-size: 14px;
+    }
+    .notice strong { color: #43331a; }
+
+    .layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr); gap: 22px; align-items: start; }
+    .card { border: 1px solid rgba(16,38,59,.08); border-radius: var(--radius); background: rgba(255,255,255,.96); box-shadow: var(--shadow); }
+    .form-card { padding: 24px; }
+    .preview-card { position: sticky; top: 16px; overflow: hidden; }
+    .preview-head { padding: 18px 21px; color: #fff; background: var(--navy); }
+    .preview-head h2 { margin: 0; font-size: 20px; }
+    .preview-head p { margin: 3px 0 0; font-size: 13px; opacity: .78; }
+    .preview-body { padding: 20px; }
+
+    .section { padding: 0 0 24px; margin: 0 0 24px; border-bottom: 1px solid var(--line); }
+    .section:last-of-type { margin-bottom: 18px; }
+    .section-title { display: flex; gap: 11px; align-items: center; margin: 0 0 16px; font-size: 19px; }
+    .step { display: inline-grid; place-items: center; width: 29px; height: 29px; border-radius: 50%; background: var(--red); color: #fff; font-size: 14px; }
+    .helper { margin: -8px 0 14px 40px; color: var(--muted); font-size: 13px; }
+
+    .segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .segmented input { position: absolute; opacity: 0; pointer-events: none; }
+    .segmented label {
+      padding: 13px 15px;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+    .segmented input:checked + label { border-color: var(--red); color: var(--red); background: #fff4f5; box-shadow: inset 0 0 0 1px var(--red); }
+    .segmented input:focus-visible + label { outline: 3px solid rgba(34,118,191,.28); outline-offset: 2px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field { margin-bottom: 14px; }
+    .field:last-child { margin-bottom: 0; }
+    .field label, .field legend { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 800; }
+    .required { color: var(--red); }
+    .optional { color: var(--muted); font-size: 12px; font-weight: 500; }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #cbd3d9;
+      border-radius: 11px;
+      color: var(--ink);
+      background: #fff;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input, select { min-height: 46px; padding: 10px 12px; }
+    textarea { min-height: 88px; padding: 11px 12px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #2878b8; box-shadow: 0 0 0 3px rgba(40,120,184,.14); }
+    .counter { display: block; margin-top: 3px; color: var(--muted); text-align: right; font-size: 11px; }
+    .example { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+
+    .nominee-fields { margin-top: 16px; padding: 16px; border-left: 4px solid var(--red); border-radius: 0 12px 12px 0; background: #fff7f7; }
+    .nominee-fields[hidden] { display: none; }
+
+    .tone-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tone-row input { position: absolute; opacity: 0; pointer-events: none; }
+    .tone-row label { padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .tone-row input:checked + label { color: #fff; border-color: var(--navy); background: var(--navy); }
+
+    .primary, .secondary, .ghost, .button-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 44px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 0;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .primary { width: 100%; color: #fff; background: var(--red); box-shadow: 0 7px 18px rgba(161,12,24,.22); }
+    .primary:hover { background: var(--red-dark); }
+    .secondary { color: #fff; background: var(--navy); }
+    .ghost { color: var(--navy); border: 1px solid #c9d0d6; background: #fff; }
+    button:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
+
+    .draft {
+      min-height: 280px;
+      padding: 18px;
+      border: 1px solid #d8dee3;
+      border-radius: 13px;
+      background: var(--paper);
+      white-space: pre-wrap;
+      line-height: 1.9;
+      font-size: 15px;
+    }
+    .draft.empty { display: grid; place-items: center; color: #88929a; text-align: center; }
+    .meter-head { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; font-size: 13px; font-weight: 800; }
+    .meter { height: 8px; margin-top: 7px; overflow: hidden; border-radius: 999px; background: #e7ebee; }
+    .meter > span { display: block; height: 100%; width: 0; background: var(--warn); transition: width .2s, background .2s; }
+    .status { margin: 8px 0 0; color: var(--warn); font-size: 13px; }
+    .status.ok { color: var(--success); }
+    .missing { margin: 14px 0 0; padding: 12px 14px; border-radius: 11px; background: #f2f5f7; color: #4e5a64; font-size: 13px; }
+    .missing strong { display: block; margin-bottom: 3px; color: var(--navy); }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 15px; }
+    .actions .wide { grid-column: 1 / -1; }
+    .toast { min-height: 23px; margin-top: 8px; color: var(--success); text-align: center; font-size: 13px; font-weight: 700; }
+
+    .submit-box { margin-top: 18px; padding: 16px; border-radius: 13px; background: var(--cream); }
+    .submit-box h3 { margin: 0 0 5px; font-size: 16px; }
+    .submit-box p { margin: 0 0 11px; color: #5d554a; font-size: 13px; }
+    .button-link { width: 100%; color: #fff; background: var(--red); }
+    .button-link.disabled { pointer-events: none; opacity: .48; }
+
+    .footer-tools { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-top: 18px; color: var(--muted); font-size: 12px; }
+    .link-button { padding: 0; border: 0; color: var(--muted); background: none; text-decoration: underline; cursor: pointer; }
+
+    @media (max-width: 900px) {
+      .hero-grid { display: block; }
+      .privacy { display: inline-block; margin-top: 15px; }
+      .layout { grid-template-columns: 1fr; }
+      .preview-card { position: static; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 20px, 1180px); }
+      .form-card, .preview-body { padding: 17px; }
+      .grid-2, .actions { grid-template-columns: 1fr; }
+      .actions .wide { grid-column: auto; }
+      .hero { padding-top: 23px; }
+      .section-title { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">2026 TKP HOSPITALITY AWARDS</p>
+        <h1>応募サポート</h1>
+        <p>短い質問に答えるだけで、自薦・他薦に合わせた応募文を組み立てます。文章が苦手でも大丈夫です。</p>
+      </div>
+      <div class="privacy">🔒 入力内容は端末内だけに保存</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="notice">
+      <span>💡</span>
+      <div><strong>このページは文章作成の補助ツールです。</strong> 内容を確認・修正してから、公式応募フォームへ貼り付けてください。AIや外部サーバーには送信しません。</div>
+    </div>
+
+    <div class="layout">
+      <form id="entryForm" class="card form-card" novalidate>
+        <section class="section">
+          <h2 class="section-title"><span class="step">1</span>応募方法を選ぶ</h2>
+          <div class="segmented" role="radiogroup" aria-label="応募方法">
+            <input type="radio" id="self" name="entryType" value="self" checked>
+            <label for="self">🙋 自薦する</label>
+            <input type="radio" id="other" name="entryType" value="other">
+            <label for="other">🤝 誰かを推薦する</label>
+          </div>
+
+          <div class="grid-2" style="margin-top:16px">
+            <div class="field">
+              <label for="category">応募部門 <span class="required">*</span></label>
+              <select id="category" data-required>
+                <option value="">選択してください</option>
+                <option>売上拡大</option>
+                <option>経費削減</option>
+                <option>業務サポート</option>
+                <option>わからない（事務局に相談）</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="period">エピソードの時期 <span class="optional">任意</span></label>
+              <input id="period" placeholder="例：2026年4月〜6月">
+            </div>
+          </div>
+
+          <div id="nomineeFields" class="nominee-fields" hidden>
+            <div class="grid-2">
+              <div class="field">
+                <label for="nominee">推薦する人の氏名 <span class="required">*</span></label>
+                <input id="nominee" autocomplete="off" placeholder="例：山田 太郎">
+              </div>
+              <div class="field">
+                <label for="relation">あなたとの関係 <span class="required">*</span></label>
+                <select id="relation">
+                  <option value="">選択してください</option>
+                  <option>同じチーム・同僚</option>
+                  <option>上司</option>
+                  <option>部下・後輩</option>
+                  <option>他部署</option>
+                  <option>その他</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="reason">その人を推薦したい一番の理由 <span class="required">*</span></label>
+              <textarea id="reason" maxlength="180" placeholder="例：担当外のことでも周囲の困りごとに気づき、いつも自分から動いているから"></textarea>
+              <span class="counter" data-count-for="reason">0 / 180</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title"><span class="step">2</span>エピソードを短く教えてください</h2>
+          <p class="helper">箇条書きや話し言葉でOK。文章にする作業はこのページが行います。</p>
+
+          <div class="field">
+            <label for="problem">① 以前、どんな課題・困りごとがありましたか？ <span class="required">*</span></label>
+            <textarea id="problem" maxlength="220" data-required placeholder="例：会場準備の手順が人によって違い、忘れ物や確認の重複が起きていた"></textarea>
+            <span class="counter" data-count-for="problem">0 / 220</span>
+          </div>
+          <div class="field">
+            <label for="action">② 具体的に何をしましたか？ <span class="required">*</span></label>
+            <textarea id="action" maxlength="220" data-required placeholder="例：準備項目を洗い出し、誰でも使えるチェックリストを作成して朝礼で共有した"></textarea>
+            <span class="counter" data-count-for="action">0 / 220</span>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="idea">③ 特に工夫した点 <span class="required">*</span></label>
+              <textarea id="idea" maxlength="180" data-required placeholder="例：忙しい時間でも確認できるよう、項目を色分けして1枚にまとめた"></textarea>
+              <span class="counter" data-count-for="idea">0 / 180</span>
+            </div>
+            <div class="field">
+              <label for="collaboration">④ 周囲への働きかけ <span class="required">*</span></label>
+              <textarea id="collaboration" maxlength="180" data-required placeholder="例：メンバーの意見を聞き、現場に合わせて毎週改善した"></textarea>
+              <span class="counter" data-count-for="collaboration">0 / 180</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="result">⑤ その結果、何がどう良くなりましたか？ <span class="required">*</span></label>
+            <textarea id="result" maxlength="220" data-required placeholder="例：準備時間が平均20分短縮し、忘れ物がなくなった。新人も一人で確認できるようになった"></textarea>
+            <span class="counter" data-count-for="result">0 / 220</span>
+          </div>
+          <div class="field">
+            <label for="evidence">⑥ 数字・お客様や同僚の反応 <span class="optional">任意・300字達成に効果的</span></label>
+            <textarea id="evidence" maxlength="200" placeholder="例：お客様から『案内がスムーズだった』という声をいただき、他会場にも展開された"></textarea>
+            <span class="counter" data-count-for="evidence">0 / 200</span>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title"><span class="step">3</span>文章の雰囲気</h2>
+          <div class="tone-row" role="radiogroup" aria-label="文章の雰囲気">
+            <input type="radio" name="tone" id="toneNatural" value="natural" checked><label for="toneNatural">自然で読みやすい</label>
+            <input type="radio" name="tone" id="toneFormal" value="formal"><label for="toneFormal">丁寧・正式</label>
+            <input type="radio" name="tone" id="toneWarm" value="warm"><label for="toneWarm">温かく熱意を込める</label>
+          </div>
+        </section>
+
+        <button class="primary" type="button" id="composeBtn">✨ 回答を応募文にまとめる</button>
+        <div class="footer-tools">
+          <span id="saveState">入力内容は自動保存されます</span>
+          <button class="link-button" type="button" id="sampleBtn">入力例で試す</button>
+          <button class="link-button" type="button" id="resetBtn">すべて消去</button>
+        </div>
+      </form>
+
+      <aside class="card preview-card" aria-live="polite">
+        <div class="preview-head">
+          <h2>応募文プレビュー</h2>
+          <p>入力するたびに自動更新されます</p>
+        </div>
+        <div class="preview-body">
+          <div id="draft" class="draft empty">左の質問に答えると、ここに応募文が表示されます。</div>
+          <div class="meter-head"><span>文字数</span><span id="charCount">0 / 300字以上</span></div>
+          <div class="meter" aria-hidden="true"><span id="meterBar"></span></div>
+          <p id="status" class="status">まずは短い質問に答えてください。</p>
+          <div id="missing" class="missing">
+            <strong>300字に近づけるコツ</strong>
+            「いつ・どれくらい」「工夫した理由」「周囲の反応」「数字で分かる変化」を加えると、説得力が上がります。
+          </div>
+
+          <div class="actions">
+            <button id="copyBtn" type="button" class="secondary" disabled>📋 文章をコピー</button>
+            <button id="downloadBtn" type="button" class="ghost" disabled>⬇ TXTで保存</button>
+          </div>
+          <div id="toast" class="toast" role="status"></div>
+
+          <div class="submit-box">
+            <h3>内容を確認できたら</h3>
+            <p>文章をコピーし、公式応募フォームに貼り付けて送信してください。</p>
+            <a id="officialLink" class="button-link disabled" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=uCwrvWjF302i7GVeLBECK0tQbmb2YM1EmJ0_PFKJaKJUOUJRTzNPNVQ0WTJBS0U5UVBGQkNGQ1dJTyQlQCN0PWcu" target="_blank" rel="noopener">公式応募フォームを開く ↗</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => [...document.querySelectorAll(s)];
+      const STORAGE_KEY = 'tkp-awards-entry-v1';
+      const form = $('#entryForm');
+      const nomineeFields = $('#nomineeFields');
+      const draftEl = $('#draft');
+      const charCountEl = $('#charCount');
+      const meterBar = $('#meterBar');
+      const statusEl = $('#status');
+      const missingEl = $('#missing');
+      const copyBtn = $('#copyBtn');
+      const downloadBtn = $('#downloadBtn');
+      const officialLink = $('#officialLink');
+      const toast = $('#toast');
+      let currentDraft = '';
+
+      const ids = ['category','period','nominee','relation','reason','problem','action','idea','collaboration','result','evidence'];
+      const clean = (value) => (value || '').trim().replace(/[。．.]+$/u, '');
+      const countChars = (value) => Array.from(value || '').length;
+      const value = (id) => clean($('#' + id).value);
+      const entryType = () => $('input[name="entryType"]:checked').value;
+      const tone = () => $('input[name="tone"]:checked').value;
+
+      function sentence(text) {
+        return text ? `${text}。` : '';
+      }
+
+      function compose() {
+        const other = entryType() === 'other';
+        const name = value('nominee');
+        const nomineeLabel = name ? `${name}さん` : 'この方';
+        const subject = other ? nomineeLabel : '私';
+        const category = value('category');
+        const period = value('period');
+        const reason = value('reason');
+        const problem = value('problem');
+        const action = value('action');
+        const idea = value('idea');
+        const collaboration = value('collaboration');
+        const result = value('result');
+        const evidence = value('evidence');
+        const hasCore = problem || action || idea || collaboration || result || reason;
+
+        if (!hasCore) return '';
+
+        const intro = other
+          ? `${nomineeLabel}を、${category || '該当部門'}の候補として推薦します。${reason ? `推薦したい一番の理由は、${reason}からです。` : ''}`
+          : `私は、${category || '該当部門'}の候補として自薦します。`;
+
+        let body = '';
+        if (period) body += `${period}頃、`;
+        if (problem) body += `${problem}という課題がありました。`;
+        if (action) body += `${subject}は、${sentence(action)}`;
+        if (idea) body += `その際、${sentence(idea)}`;
+        if (collaboration) body += `また、${sentence(collaboration)}`;
+        if (result) body += `その結果、${sentence(result)}`;
+        if (evidence) body += `さらに、${sentence(evidence)}`;
+
+        let close = '';
+        if (tone() === 'formal') {
+          close = other
+            ? `以上の行動と成果は、日々の業務品質向上に大きく貢献するものであり、表彰にふさわしいと考え推薦いたします。`
+            : `この経験を今後も業務品質の向上に生かし、周囲への展開を続けてまいります。`;
+        } else if (tone() === 'warm') {
+          close = other
+            ? `目の前の相手と仲間を大切にする姿勢が周囲にも良い影響を与えており、多くの人に知ってほしい取り組みだと思い推薦します。`
+            : `この経験を一度きりにせず、仲間と共有しながら、より良いサービスにつなげていきたいです。`;
+        } else {
+          close = other
+            ? `この取り組みはチームやお客様にも良い影響を広げており、表彰にふさわしいと考えて推薦します。`
+            : `今後もこの工夫を周囲と共有し、より良いサービスと働き方につなげていきます。`;
+        }
+
+        return `${intro}\n\n${body}\n\n${close}`.replace(/\n{3,}/g, '\n\n');
+      }
+
+      function requiredComplete() {
+        const common = ['category','problem','action','idea','collaboration','result'].every(id => value(id));
+        if (entryType() === 'self') return common;
+        return common && ['nominee','relation','reason'].every(id => value(id));
+      }
+
+      function updatePreview(showToast = false) {
+        currentDraft = compose();
+        const count = countChars(currentDraft);
+        const complete = requiredComplete();
+        draftEl.textContent = currentDraft || '左の質問に答えると、ここに応募文が表示されます。';
+        draftEl.classList.toggle('empty', !currentDraft);
+        charCountEl.textContent = `${count} / 300字以上`;
+        meterBar.style.width = `${Math.min(100, (count / 300) * 100)}%`;
+        meterBar.style.background = count >= 300 ? 'var(--success)' : 'var(--warn)';
+
+        if (!complete) {
+          statusEl.textContent = '必須項目を入力すると、コピーできるようになります。';
+          statusEl.className = 'status';
+        } else if (count < 300) {
+          statusEl.textContent = `あと ${300 - count} 字です。数字や周囲の反応を足してみましょう。`;
+          statusEl.className = 'status';
+        } else {
+          statusEl.textContent = '✓ 300字を達成しました。内容を確認して応募できます。';
+          statusEl.className = 'status ok';
+        }
+
+        const ready = complete && count >= 300;
+        copyBtn.disabled = !ready;
+        downloadBtn.disabled = !ready;
+        officialLink.classList.toggle('disabled', !ready);
+        officialLink.setAttribute('aria-disabled', String(!ready));
+
+        const tips = [];
+        if (!value('period')) tips.push('取り組んだ時期');
+        if (countChars(value('problem')) < 25) tips.push('以前の状態や困りごとの具体例');
+        if (countChars(value('action')) < 30) tips.push('実際に行った手順');
+        if (countChars(value('idea')) < 20) tips.push('なぜその工夫を選んだか');
+        if (countChars(value('collaboration')) < 20) tips.push('周囲との相談・共有方法');
+        if (!value('evidence')) tips.push('数字やお客様・同僚の反応');
+        missingEl.innerHTML = `<strong>${count >= 300 ? '仕上げの確認' : '追加すると良い内容'}</strong>${tips.length ? tips.slice(0,4).join('／') : '誤字や固有名詞を確認してください。'}`;
+
+        save();
+        if (showToast) {
+          toast.textContent = ready ? '応募文を更新しました。' : '不足している項目や文字数を確認してください。';
+          setTimeout(() => { toast.textContent = ''; }, 2500);
+        }
+      }
+
+      function setMode() {
+        const other = entryType() === 'other';
+        nomineeFields.hidden = !other;
+        ['nominee','relation','reason'].forEach(id => {
+          $('#' + id).required = other;
+        });
+        updatePreview();
+      }
+
+      function updateFieldCounters() {
+        $$('[data-count-for]').forEach(counter => {
+          const el = $('#' + counter.dataset.countFor);
+          counter.textContent = `${countChars(el.value)} / ${el.maxLength}`;
+        });
+      }
+
+      function save() {
+        const data = { entryType: entryType(), tone: tone() };
+        ids.forEach(id => data[id] = $('#' + id).value);
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (_) {}
+        $('#saveState').textContent = '保存済み（この端末のみ）';
+      }
+
+      function load() {
+        try {
+          const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+          if (data.entryType) $(`input[name="entryType"][value="${data.entryType}"]`).checked = true;
+          if (data.tone) $(`input[name="tone"][value="${data.tone}"]`).checked = true;
+          ids.forEach(id => { if (typeof data[id] === 'string') $('#' + id).value = data[id]; });
+        } catch (_) {}
+      }
+
+      function fillSample() {
+        const sample = {
+          category: '業務サポート',
+          period: '2026年4月から6月',
+          problem: '会場準備の手順が担当者ごとに異なり、備品の確認漏れや二重確認が発生して、開場前のスタッフに負担がかかっていた',
+          action: '過去のミスと準備項目を洗い出し、写真付きのチェックリストを作成して、毎朝のミーティングで使い方を共有した',
+          idea: '忙しい時間でも短時間で確認できるよう、重要度で色分けし、スマートフォンでも見やすい一枚の形式にまとめた',
+          collaboration: '現場メンバーから毎週意見を集め、使いにくい表現や項目を一緒に見直し、他会場の担当者にも試してもらった',
+          result: '準備時間が一回あたり平均20分短縮し、3か月間、備品の確認漏れがゼロになった。新人も一人で準備確認ができるようになった',
+          evidence: 'お客様から案内が以前よりスムーズになったという声をいただき、同じチェックリストが別の2会場にも展開された'
+        };
+        Object.entries(sample).forEach(([id, val]) => $('#' + id).value = val);
+        updateFieldCounters();
+        updatePreview(true);
+      }
+
+      async function copyDraft() {
+        try {
+          await navigator.clipboard.writeText(currentDraft);
+        } catch (_) {
+          const area = document.createElement('textarea');
+          area.value = currentDraft;
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand('copy');
+          area.remove();
+        }
+        toast.textContent = '応募文をコピーしました。';
+        setTimeout(() => { toast.textContent = ''; }, 2500);
+      }
+
+      function downloadDraft() {
+        const blob = new Blob([currentDraft], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `TKP_Hospitality_Awards_${entryType() === 'other' ? '推薦' : '自薦'}文.txt`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      form.addEventListener('input', () => { updateFieldCounters(); updatePreview(); });
+      form.addEventListener('change', (event) => {
+        if (event.target.name === 'entryType') setMode();
+        else updatePreview();
+      });
+      $('#composeBtn').addEventListener('click', () => {
+        updatePreview(true);
+        document.querySelector('.preview-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      copyBtn.addEventListener('click', copyDraft);
+      downloadBtn.addEventListener('click', downloadDraft);
+      $('#sampleBtn').addEventListener('click', fillSample);
+      $('#resetBtn').addEventListener('click', () => {
+        if (!confirm('入力内容をすべて消去しますか？')) return;
+        localStorage.removeItem(STORAGE_KEY);
+        form.reset();
+        ids.forEach(id => $('#' + id).value = '');
+        updateFieldCounters();
+        setMode();
+      });
+
+      load();
+      updateFieldCounters();
+      setMode();
+    })();
+  </script>
+</body>
+</html>
