@@ -37,66 +37,6 @@
     }
 
     .teams-window { min-height: 100vh; background: var(--canvas); }
-    .teams-topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      height: 48px;
-      padding: 0 16px;
-      color: #fff;
-      background: var(--teams);
-    }
-    .waffle { display: grid; grid-template-columns: repeat(3, 3px); gap: 3px; padding: 7px; }
-    .waffle i { width: 3px; height: 3px; border-radius: 1px; background: rgba(255,255,255,.92); }
-    .teams-controls { display: flex; gap: 8px; color: rgba(255,255,255,.78); font-size: 20px; line-height: 1; }
-    .teams-brand { font-size: 15px; font-weight: 600; white-space: nowrap; }
-    .teams-search {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      flex: 1;
-      max-width: 520px;
-      min-height: 32px;
-      margin: 0 auto;
-      padding: 5px 12px;
-      color: rgba(255,255,255,.9);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 6px;
-      background: rgba(255,255,255,.14);
-      font-size: 13px;
-    }
-    .teams-top-actions { display: flex; align-items: center; gap: 16px; margin-left: auto; color: rgba(255,255,255,.9); }
-    .teams-person { display: grid; place-items: center; width: 30px; height: 30px; border: 2px solid rgba(255,255,255,.7); border-radius: 50%; color: #382e20; background: #f1d49a; font-size: 12px; font-weight: 700; }
-
-    .teams-layout { display: grid; grid-template-columns: 68px minmax(0, 1fr); min-height: calc(100vh - 48px); }
-    .teams-rail {
-      position: sticky;
-      top: 48px;
-      align-self: start;
-      height: calc(100vh - 48px);
-      padding: 8px 6px;
-      border-right: 1px solid #dedee5;
-      background: #ebebf0;
-    }
-    .rail-item {
-      display: grid;
-      place-items: center;
-      gap: 2px;
-      min-height: 59px;
-      margin-bottom: 4px;
-      padding: 6px 2px;
-      color: #5b5b65;
-      border-radius: 6px;
-      font-size: 10px;
-      text-align: center;
-    }
-    .rail-icon { width: 23px; height: 23px; display: grid; place-items: center; font-size: 20px; line-height: 1; }
-    .rail-item.active { position: relative; color: var(--teams); background: #fff; font-weight: 600; }
-    .rail-item.active::before { content: ""; position: absolute; left: -6px; top: 12px; bottom: 12px; width: 3px; border-radius: 0 3px 3px 0; background: var(--teams); }
-
     .app-shell { min-width: 0; }
     .app-header {
       display: flex;
@@ -121,12 +61,12 @@
     .progress-step.done, .progress-step.current { border-color: var(--teams); }
     .progress-step.current { color: #30303a; font-weight: 600; }
 
-    .work-area { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(330px, .75fr); gap: 18px; align-items: start; max-width: 1480px; margin: 0 auto; padding: 12px 24px 40px; }
+    .work-area { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(390px, .9fr); gap: 18px; align-items: start; max-width: 1480px; margin: 0 auto; padding: 12px 24px 40px; }
     .notice { grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; padding: 10px 13px; border: 1px solid #d6d6ed; border-radius: 8px; color: #4e4e59; background: #f7f7ff; font-size: 12px; }
     .notice strong { color: #30303a; }
     .card { border: 1px solid #dedee5; border-radius: 10px; background: #fff; }
     .form-card { padding: 22px; }
-    .preview-card { position: sticky; top: 64px; overflow: hidden; }
+    .preview-card { overflow: hidden; }
     .preview-head { padding: 17px 18px; border-bottom: 1px solid var(--line); background: #fff; }
     .preview-head::before { content: "LIVE PREVIEW"; display: block; margin-bottom: 4px; color: var(--teams); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
     .preview-head h2 { margin: 0; font-size: 17px; font-weight: 600; }
@@ -161,6 +101,7 @@
     .counter { display: block; margin-top: 3px; color: var(--muted); text-align: right; font-size: 10px; }
     .nominee-fields { margin-top: 15px; padding: 15px; border-left: 3px solid var(--teams); border-radius: 0 7px 7px 0; background: #f7f7ff; }
     .nominee-fields[hidden] { display: none; }
+    .custom-category[hidden] { display: none; }
 
     .tone-row { display: flex; flex-wrap: wrap; gap: 7px; }
     .tone-row label { padding: 7px 11px; border: 1px solid #c9c9d1; border-radius: 6px; background: #fff; cursor: pointer; font-size: 12px; font-weight: 600; }
@@ -173,13 +114,17 @@
     .ghost { color: #30303a; border: 1px solid #c9c9d1; background: #fff; }
     button:disabled { opacity: .45; cursor: not-allowed; }
 
-    .draft { min-height: 280px; padding: 14px; border: 1px solid #d8d8df; border-radius: 7px; background: #fafaff; white-space: pre-wrap; line-height: 1.75; font-size: 13px; }
+    .answer-block + .answer-block { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .answer-title { margin: 0 0 8px; font-size: 14px; font-weight: 700; line-height: 1.5; }
+    .draft { min-height: 160px; padding: 14px; border: 1px solid #d8d8df; border-radius: 7px; background: #fafaff; white-space: pre-wrap; line-height: 1.75; font-size: 13px; }
     .draft.empty { display: grid; place-items: center; color: #777783; text-align: center; }
     .meter-head { display: flex; justify-content: space-between; gap: 12px; margin-top: 13px; font-size: 12px; font-weight: 600; }
     .meter { height: 6px; margin-top: 6px; overflow: hidden; border-radius: 999px; background: #e7e7ed; }
     .meter > span { display: block; height: 100%; width: 0; background: var(--warn); transition: width .2s, background .2s; }
     .status { margin: 7px 0 0; color: var(--warn); font-size: 12px; }
     .status.ok { color: var(--success); }
+    .answer-copy { width: 100%; margin-top: 9px; }
+    .recommendation-answer[hidden] { display: none; }
     .missing { margin: 12px 0 0; padding: 11px 12px; border-radius: 7px; color: #554a18; background: #fff8d9; font-size: 11px; }
     .missing strong { display: block; margin-bottom: 3px; color: #433a16; }
     .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
@@ -195,13 +140,8 @@
 
     @media (max-width: 1050px) {
       .work-area { grid-template-columns: 1fr; }
-      .preview-card { position: static; }
     }
     @media (max-width: 720px) {
-      .teams-topbar { gap: 9px; padding: 0 10px; }
-      .teams-controls, .teams-search, .teams-top-actions span { display: none; }
-      .teams-layout { grid-template-columns: 1fr; }
-      .teams-rail { display: none; }
       .app-header { padding: 10px 14px; }
       .save-pill { display: none; }
       .progress-row { padding: 10px 14px 4px; }
@@ -216,26 +156,7 @@
 </head>
 <body>
   <section class="teams-window" aria-label="TKP Hospitality Awards Teams風応募アプリ">
-    <header class="teams-topbar">
-      <div class="waffle" aria-label="アプリ起動ツール"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="teams-controls" aria-hidden="true"><span>‹</span><span>›</span></div>
-      <div class="teams-brand">Microsoft Teams</div>
-      <div class="teams-search" aria-label="検索"><span>⌕</span><span>検索</span></div>
-      <div class="teams-top-actions" aria-hidden="true"><span>…</span><span>?</span><span>⚙</span></div>
-      <div class="teams-person" aria-label="ログイン中のユーザー">YC</div>
-    </header>
-
-    <div class="teams-layout">
-      <nav class="teams-rail" aria-label="Teams ナビゲーション">
-        <div class="rail-item"><span class="rail-icon">●</span><span>アクティビティ</span></div>
-        <div class="rail-item"><span class="rail-icon">▣</span><span>チャット</span></div>
-        <div class="rail-item"><span class="rail-icon">♟</span><span>Teams</span></div>
-        <div class="rail-item active" aria-current="page"><span class="rail-icon">🏆</span><span>表彰推薦</span></div>
-        <div class="rail-item"><span class="rail-icon">▤</span><span>ファイル</span></div>
-        <div class="rail-item"><span class="rail-icon">•••</span><span>アプリ</span></div>
-      </nav>
-
-      <div class="app-shell">
+    <div class="app-shell">
         <header class="app-header">
           <div class="app-title">
             <div class="award-mark" aria-hidden="true">✦</div>
@@ -278,13 +199,18 @@
                 <option>売上拡大</option>
                 <option>経費削減</option>
                 <option>業務サポート</option>
-                <option>わからない（事務局に相談）</option>
+                <option value="custom">カスタマイズ</option>
               </select>
             </div>
             <div class="field">
               <label for="period">エピソードの時期 <span class="optional">任意</span></label>
               <input id="period" placeholder="例：2026年4月〜6月">
             </div>
+          </div>
+
+          <div id="customCategoryFields" class="field custom-category" hidden>
+            <label for="customCategory">カスタマイズする部門名 <span class="required">*</span></label>
+            <input id="customCategory" maxlength="60" placeholder="例：顧客満足度向上・チーム連携">
           </div>
 
           <div id="nomineeFields" class="nominee-fields" hidden>
@@ -374,17 +300,40 @@
           <p>入力するたびに自動更新されます</p>
         </div>
         <div class="preview-body">
-          <div id="draft" class="draft empty">左の質問に答えると、ここに応募文が表示されます。</div>
-          <div class="meter-head"><span>文字数</span><span id="charCount">0 / 300字以上</span></div>
-          <div class="meter" aria-hidden="true"><span id="meterBar"></span></div>
-          <p id="status" class="status">まずは短い質問に答えてください。</p>
+          <section class="answer-block" data-answer="success">
+            <h3 class="answer-title">2⃣ 成功事例とエントリー理由について</h3>
+            <div id="successDraft" class="draft empty">質問に答えると、ここに回答文が表示されます。</div>
+            <div class="meter-head"><span>文字数</span><span id="successCount">0 / 300字以上</span></div>
+            <div class="meter" aria-hidden="true"><span id="successMeter"></span></div>
+            <p id="successStatus" class="status">まずは短い質問に答えてください。</p>
+            <button type="button" class="ghost answer-copy" data-copy-answer="success" disabled>📋 この回答だけコピー</button>
+          </section>
+
+          <section class="answer-block" data-answer="result">
+            <h3 class="answer-title">3⃣ 上記内容からの結果や具体的な成果について</h3>
+            <div id="resultDraft" class="draft empty">質問に答えると、ここに回答文が表示されます。</div>
+            <div class="meter-head"><span>文字数</span><span id="resultCount">0 / 300字以上</span></div>
+            <div class="meter" aria-hidden="true"><span id="resultMeter"></span></div>
+            <p id="resultStatus" class="status">まずは短い質問に答えてください。</p>
+            <button type="button" class="ghost answer-copy" data-copy-answer="result" disabled>📋 この回答だけコピー</button>
+          </section>
+
+          <section id="recommendationAnswer" class="answer-block recommendation-answer" data-answer="recommendation" hidden>
+            <h3 class="answer-title">推薦者コメント欄</h3>
+            <div id="recommendationDraft" class="draft empty">推薦情報を入力すると、ここに回答文が表示されます。</div>
+            <div class="meter-head"><span>文字数</span><span id="recommendationCount">0 / 300字以上</span></div>
+            <div class="meter" aria-hidden="true"><span id="recommendationMeter"></span></div>
+            <p id="recommendationStatus" class="status">推薦する方について教えてください。</p>
+            <button type="button" class="ghost answer-copy" data-copy-answer="recommendation" disabled>📋 この回答だけコピー</button>
+          </section>
+
           <div id="missing" class="missing">
-            <strong>300字に近づけるコツ</strong>
-            「いつ・どれくらい」「工夫した理由」「周囲の反応」「数字で分かる変化」を加えると、説得力が上がります。
+            <strong>回答を仕上げるコツ</strong>
+            「いつ・どれくらい」「工夫した理由」「周囲の反応」「数字で分かる変化」を加えると、各回答の説得力が上がります。
           </div>
 
           <div class="actions">
-            <button id="copyBtn" type="button" class="secondary" disabled>📋 文章をコピー</button>
+            <button id="copyBtn" type="button" class="secondary" disabled>📋 すべてコピー</button>
             <button id="downloadBtn" type="button" class="ghost" disabled>⬇ TXTで保存</button>
           </div>
           <div id="toast" class="toast" role="status"></div>
@@ -397,11 +346,10 @@
         </div>
           </aside>
         </main>
-      </div>
     </div>
   </section>
 
-  <script>
+  <script type="text/plain" id="legacy-script">
     (() => {
       const $ = (s) => document.querySelector(s);
       const $$ = (s) => [...document.querySelectorAll(s)];
@@ -627,5 +575,6 @@
       setMode();
     })();
   </script>
+  <script src="app.js"></script>
 </body>
 </html>
