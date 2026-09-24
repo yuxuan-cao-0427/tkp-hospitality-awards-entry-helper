@@ -127,13 +127,13 @@
     .missing { margin: 12px 0 0; padding: 11px 12px; border-radius: 7px; color: #554a18; background: #fff8d9; font-size: 11px; }
     .missing strong { display: block; margin-bottom: 3px; color: #433a16; }
     .toast { min-height: 21px; margin-top: 6px; color: var(--success); text-align: center; font-size: 12px; font-weight: 600; }
-    .submit-box { grid-column: 1 / -1; padding: 16px; background: #f6f6fa; }
-    .submit-box h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; }
-    .submit-box p { margin: 0 0 9px; color: var(--muted); font-size: 11px; }
-    .next-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .submit-box { grid-column: 1 / -1; padding: 18px; border: 2px solid var(--teams); border-left-width: 6px; background: var(--teams-pale); box-shadow: 0 4px 14px rgba(70, 73, 170, .14); }
+    .official-kicker { display: inline-block; padding: 3px 9px; border-radius: 4px; color: #fff; background: var(--teams); font-size: 11px; font-weight: 700; letter-spacing: .04em; }
+    .submit-box h3 { margin: 8px 0 4px; color: var(--teams-dark); font-size: 18px; font-weight: 700; }
+    .submit-box p { margin: 0 0 13px; color: #454550; font-size: 13px; }
+    .next-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
     .button-link { width: 100%; color: #fff; border: 1px solid var(--teams); background: var(--teams); }
-    .button-link.outline { color: var(--teams); background: #fff; }
-    .button-link.outline:hover { color: #fff; background: var(--teams-dark); }
+    .submit-box .button-link { min-height: 44px; box-shadow: 0 2px 5px rgba(70, 73, 170, .18); }
     .button-link.disabled { pointer-events: none; opacity: .48; }
     .footer-tools { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-top: 14px; color: var(--muted); font-size: 11px; }
     .link-button { padding: 0; border: 0; color: var(--teams); background: none; text-decoration: none; cursor: pointer; }
@@ -178,11 +178,12 @@
 
         <main class="work-area">
           <section class="card submit-box" aria-label="応募関連リンク">
-            <h3>応募の案内・エントリーシート・送信</h3>
+            <span class="official-kicker">TKP Hospitality Awards 公式リンク</span>
+            <h3>公式応募リンク</h3>
             <p>公式ページで募集要項を確認し、必要に応じてエントリーシートをダウンロードしてください。回答文を作成してコピーしたら、応募フォームから送信できます。</p>
             <div class="next-links">
-              <a class="button-link outline" href="https://tkpjp.sharepoint.com/SitePages/KPI%E3%83%BB%E3%83%90%E3%83%83%E3%82%AF%E5%BE%A1%E3%83%95.aspx" target="_blank" rel="noopener">公式ページを確認する</a>
-              <a class="button-link outline" href="https://tkpjp.sharepoint.com/:x:/s/project_21-1-proj-4_/IQCFz15e3lgLRYlwjrHpzmfXAZkjul9-IZf8GjoQkVEUIDg?e=CyFMEV" target="_blank" rel="noopener">エントリーシートを開く・ダウンロード</a>
+              <a class="button-link" href="https://tkpjp.sharepoint.com/SitePages/KPI%E3%83%BB%E3%83%90%E3%83%83%E3%82%AF%E5%BE%A1%E3%83%95.aspx" target="_blank" rel="noopener">公式ページを確認する</a>
+              <a class="button-link" href="https://tkpjp.sharepoint.com/:x:/s/project_21-1-proj-4_/IQCFz15e3lgLRYlwjrHpzmfXAZkjul9-IZf8GjoQkVEUIDg?e=CyFMEV" target="_blank" rel="noopener">エントリーシートを開く・ダウンロード</a>
               <a class="button-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=uCwrvWjF302i7GVeLBECK0tQbmb2YM1EmJ0_PFKJaKJUOUJRTzNPNVQ0WTJBS0U5UVBGQkNGQ1dJTyQlQCN0PWcu" target="_blank" rel="noopener">応募フォームから送信する</a>
             </div>
           </section>
