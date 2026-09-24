@@ -49,7 +49,6 @@
       background: #fff;
     }
     .app-title { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .award-mark { display: grid; place-items: center; flex: 0 0 auto; width: 40px; height: 40px; border-radius: 8px; color: #fff; background: var(--tkp-red); font-size: 21px; }
     h1, h2, h3, p { margin-top: 0; }
     h1 { margin-bottom: 1px; font-size: 18px; line-height: 1.3; font-weight: 600; }
     .app-subtitle { margin: 0; color: var(--muted); font-size: 12px; }
@@ -163,7 +162,6 @@
     <div class="app-shell">
         <header class="app-header">
           <div class="app-title">
-            <div class="award-mark" aria-hidden="true">✦</div>
             <div>
               <h1>TKP Hospitality Awards エントリーツール</h1>
               <p class="app-subtitle">短い質問から、自薦・他薦の応募文を作成します</p>
@@ -184,14 +182,13 @@
             <h3>応募の案内・エントリーシート・送信</h3>
             <p>公式ページで募集要項を確認し、必要に応じてエントリーシートをダウンロードしてください。回答文を作成してコピーしたら、応募フォームから送信できます。</p>
             <div class="next-links">
-              <a class="button-link outline" href="https://tkpjp.sharepoint.com/SitePages/KPI%E3%83%BB%E3%83%90%E3%83%83%E3%82%AF%E5%BE%A1%E3%83%95.aspx" target="_blank" rel="noopener">📄 公式ページを確認する ↗</a>
-              <a class="button-link outline" href="https://tkpjp.sharepoint.com/:x:/s/project_21-1-proj-4_/IQCFz15e3lgLRYlwjrHpzmfXAZkjul9-IZf8GjoQkVEUIDg?e=CyFMEV" target="_blank" rel="noopener">⬇ エントリーシートを開く・ダウンロード ↗</a>
-              <a class="button-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=uCwrvWjF302i7GVeLBECK0tQbmb2YM1EmJ0_PFKJaKJUOUJRTzNPNVQ0WTJBS0U5UVBGQkNGQ1dJTyQlQCN0PWcu" target="_blank" rel="noopener">✉ 応募フォームから送信する ↗</a>
+              <a class="button-link outline" href="https://tkpjp.sharepoint.com/SitePages/KPI%E3%83%BB%E3%83%90%E3%83%83%E3%82%AF%E5%BE%A1%E3%83%95.aspx" target="_blank" rel="noopener">公式ページを確認する</a>
+              <a class="button-link outline" href="https://tkpjp.sharepoint.com/:x:/s/project_21-1-proj-4_/IQCFz15e3lgLRYlwjrHpzmfXAZkjul9-IZf8GjoQkVEUIDg?e=CyFMEV" target="_blank" rel="noopener">エントリーシートを開く・ダウンロード</a>
+              <a class="button-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=uCwrvWjF302i7GVeLBECK0tQbmb2YM1EmJ0_PFKJaKJUOUJRTzNPNVQ0WTJBS0U5UVBGQkNGQ1dJTyQlQCN0PWcu" target="_blank" rel="noopener">応募フォームから送信する</a>
             </div>
           </section>
 
           <div class="notice">
-            <span>ⓘ</span>
             <div><strong>入力内容はこの端末内だけに保存されます。</strong> 内容を確認してから、公式応募フォームへコピーしてください。AIや外部サーバーには送信しません。</div>
           </div>
 
@@ -200,9 +197,9 @@
           <h2 class="section-title"><span class="step">1</span>応募方法を選ぶ</h2>
           <div class="segmented" role="radiogroup" aria-label="応募方法">
             <input type="radio" id="self" name="entryType" value="self" checked>
-            <label for="self">🙋 自薦する</label>
+            <label for="self">自薦する</label>
             <input type="radio" id="other" name="entryType" value="other">
-            <label for="other">🤝 誰かを推薦する</label>
+            <label for="other">誰かを推薦する</label>
           </div>
 
           <div class="grid-2" style="margin-top:16px">
@@ -298,7 +295,7 @@
           </div>
         </section>
 
-        <button class="primary" type="button" id="composeBtn">✨ 回答を応募文にまとめる</button>
+        <button class="primary" type="button" id="composeBtn">回答を応募文にまとめる</button>
         <div class="footer-tools">
           <span id="saveState">入力内容は自動保存されます</span>
           <button class="link-button" type="button" id="sampleBtn">入力例で試す</button>
@@ -313,21 +310,21 @@
         </div>
         <div class="preview-body">
           <section class="answer-block" data-answer="success">
-            <h3 class="answer-title">2⃣ 成功事例とエントリー理由について</h3>
+            <h3 class="answer-title">2. 成功事例とエントリー理由について</h3>
             <div id="successDraft" class="draft empty">質問に答えると、ここに回答文が表示されます。</div>
             <div class="meter-head"><span>文字数</span><span id="successCount">0 / 300字以上</span></div>
             <div class="meter" aria-hidden="true"><span id="successMeter"></span></div>
             <p id="successStatus" class="status">まずは短い質問に答えてください。</p>
-            <button type="button" class="ghost answer-copy" data-copy-answer="success" disabled>📋 この回答だけコピー</button>
+            <button type="button" class="ghost answer-copy" data-copy-answer="success" disabled>この回答だけコピー</button>
           </section>
 
           <section class="answer-block" data-answer="result">
-            <h3 class="answer-title">3⃣ 上記内容からの結果や具体的な成果について</h3>
+            <h3 class="answer-title">3. 上記内容からの結果や具体的な成果について</h3>
             <div id="resultDraft" class="draft empty">質問に答えると、ここに回答文が表示されます。</div>
             <div class="meter-head"><span>文字数</span><span id="resultCount">0 / 300字以上</span></div>
             <div class="meter" aria-hidden="true"><span id="resultMeter"></span></div>
             <p id="resultStatus" class="status">まずは短い質問に答えてください。</p>
-            <button type="button" class="ghost answer-copy" data-copy-answer="result" disabled>📋 この回答だけコピー</button>
+            <button type="button" class="ghost answer-copy" data-copy-answer="result" disabled>この回答だけコピー</button>
           </section>
 
           <section id="recommendationAnswer" class="answer-block recommendation-answer" data-answer="recommendation" hidden>
@@ -336,7 +333,7 @@
             <div class="meter-head"><span>文字数</span><span id="recommendationCount">0 / 300字以上</span></div>
             <div class="meter" aria-hidden="true"><span id="recommendationMeter"></span></div>
             <p id="recommendationStatus" class="status">推薦する方について教えてください。</p>
-            <button type="button" class="ghost answer-copy" data-copy-answer="recommendation" disabled>📋 この回答だけコピー</button>
+            <button type="button" class="ghost answer-copy" data-copy-answer="recommendation" disabled>この回答だけコピー</button>
           </section>
 
           <div id="missing" class="missing">
@@ -345,8 +342,8 @@
           </div>
 
           <div class="actions">
-            <button id="copyBtn" type="button" class="secondary" disabled>📋 すべてコピー</button>
-            <button id="downloadBtn" type="button" class="ghost" disabled>⬇ TXTで保存</button>
+            <button id="copyBtn" type="button" class="secondary" disabled>すべてコピー</button>
+            <button id="downloadBtn" type="button" class="ghost" disabled>TXTで保存</button>
           </div>
           <div id="toast" class="toast" role="status"></div>
 
@@ -457,7 +454,7 @@
           statusEl.textContent = `あと ${300 - count} 字です。数字や周囲の反応を足してみましょう。`;
           statusEl.className = 'status';
         } else {
-          statusEl.textContent = '✓ 300字を達成しました。内容を確認して応募できます。';
+          statusEl.textContent = '300字を達成しました。内容を確認して応募できます。';
           statusEl.className = 'status ok';
         }
 

@@ -179,7 +179,7 @@
       status.textContent = `あと ${TARGET_LENGTH - count} 字です。具体例や数字を加えてください。`;
       status.className = 'status';
     } else {
-      status.textContent = '✓ 300字を達成しました。内容を確認してコピーできます。';
+      status.textContent = '300字を達成しました。内容を確認してコピーできます。';
       status.className = 'status ok';
     }
     return ready;
@@ -187,8 +187,8 @@
 
   function combinedDraft() {
     const sections = [
-      `2⃣ 成功事例とエントリー理由について\n${currentAnswers.success}`,
-      `3⃣ 上記内容からの結果や具体的な成果について\n${currentAnswers.result}`
+      `2. 成功事例とエントリー理由について\n${currentAnswers.success}`,
+      `3. 上記内容からの結果や具体的な成果について\n${currentAnswers.result}`
     ];
     if (isOther()) sections.push(`推薦者コメント欄\n${currentAnswers.recommendation}`);
     return sections.join('\n\n');
