@@ -153,7 +153,9 @@
     .footer-tools { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-top: 14px; color: var(--muted); font-size: 11px; }
     .link-button { padding: 0; border: 0; color: var(--teams); background: none; text-decoration: none; cursor: pointer; }
     .link-button:hover { text-decoration: underline; }
-    .quick-start { margin: 0 0 16px; }
+    .quick-start { margin: 0 0 16px; text-align: right; }
+    .quick-start .link-button { padding: 7px 12px; border: 1px solid var(--teams); border-radius: 5px; background: #fff; font-size: 12px; font-weight: 600; }
+    .quick-start .link-button:hover { color: #fff; background: var(--teams); text-decoration: none; }
 
     @media (max-width: 1050px) {
       .work-area { grid-template-columns: 1fr; }
