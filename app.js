@@ -8,8 +8,6 @@
   const nomineeFields = $('#nomineeFields');
   const customCategoryFields = $('#customCategoryFields');
   const recommendationAnswer = $('#recommendationAnswer');
-  const copyBtn = $('#copyBtn');
-  const downloadBtn = $('#downloadBtn');
   const missingEl = $('#missing');
   const toast = $('#toast');
   let currentAnswers = { success: '', result: '', recommendation: '' };
@@ -185,15 +183,6 @@
     return ready;
   }
 
-  function combinedDraft() {
-    const sections = [
-      `2. 成功事例とエントリー理由について\n${currentAnswers.success}`,
-      `3. 上記内容からの結果や具体的な成果について\n${currentAnswers.result}`
-    ];
-    if (isOther()) sections.push(`推薦者コメント欄\n${currentAnswers.recommendation}`);
-    return sections.join('\n\n');
-  }
-
   function updatePreview(announce = false) {
     currentAnswers = composeAnswers();
     const complete = requiredComplete();
@@ -204,8 +193,6 @@
     ];
     if (isOther()) readiness.push(updateAnswer('recommendation', currentAnswers.recommendation, complete));
     const ready = readiness.every(Boolean);
-    copyBtn.disabled = !ready;
-    downloadBtn.disabled = !ready;
 
     const tips = [];
     if (!value('period')) tips.push('取り組んだ時期');
@@ -297,16 +284,6 @@
     showToast(message);
   }
 
-  function downloadDraft() {
-    const blob = new Blob([combinedDraft()], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement('a');
-    anchor.href = url;
-    anchor.download = `TKP_Hospitality_Awards_${isOther() ? '推薦' : '自薦'}文.txt`;
-    anchor.click();
-    URL.revokeObjectURL(url);
-  }
-
   form.addEventListener('input', () => {
     setCategoryMode();
     updateFieldCounters();
@@ -324,8 +301,6 @@
   $$('[data-copy-answer]').forEach((button) => {
     button.addEventListener('click', () => copyText(currentAnswers[button.dataset.copyAnswer], 'この回答をコピーしました。'));
   });
-  copyBtn.addEventListener('click', () => copyText(combinedDraft(), 'すべての回答をコピーしました。'));
-  downloadBtn.addEventListener('click', downloadDraft);
   $('#sampleBtn').addEventListener('click', fillSample);
   $('#resetBtn').addEventListener('click', () => {
     if (!confirm('入力内容をすべて消去しますか？')) return;

@@ -126,7 +126,6 @@
     .recommendation-answer[hidden] { display: none; }
     .missing { margin: 12px 0 0; padding: 11px 12px; border-radius: 7px; color: #554a18; background: #fff8d9; font-size: 11px; }
     .missing strong { display: block; margin-bottom: 3px; color: #433a16; }
-    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
     .toast { min-height: 21px; margin-top: 6px; color: var(--success); text-align: center; font-size: 12px; font-weight: 600; }
     .submit-box { grid-column: 1 / -1; padding: 16px; background: #f6f6fa; }
     .submit-box h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; }
@@ -150,7 +149,7 @@
       .progress-step { font-size: 10px; }
       .work-area { padding: 10px 10px 28px; }
       .form-card, .preview-body { padding: 15px; }
-      .grid-2, .actions { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
       .next-links { grid-template-columns: 1fr; }
       .segmented label { min-height: 60px; }
       .footer-tools { flex-wrap: wrap; }
@@ -341,10 +340,6 @@
             「いつ・どれくらい」「工夫した理由」「周囲の反応」「数字で分かる変化」を加えると、各回答の説得力が上がります。
           </div>
 
-          <div class="actions">
-            <button id="copyBtn" type="button" class="secondary" disabled>すべてコピー</button>
-            <button id="downloadBtn" type="button" class="ghost" disabled>TXTで保存</button>
-          </div>
           <div id="toast" class="toast" role="status"></div>
 
         </div>
