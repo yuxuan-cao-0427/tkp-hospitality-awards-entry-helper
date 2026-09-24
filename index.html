@@ -76,16 +76,15 @@
     .encouragement-top { display: flex; gap: 18px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .encouragement h2 { margin: 0 0 4px; color: var(--teams-dark); font-size: 18px; line-height: 1.4; }
     .encouragement-lead { margin: 0; color: #41414b; font-size: 12.5px; line-height: 1.55; }
-    .encouragement-cta { flex: 0 0 auto; min-width: 150px; padding: 10px 18px; border: 1px solid var(--teams); border-radius: 6px; color: #fff; background: var(--teams); text-align: center; font-size: 13px; font-weight: 700; text-decoration: none; box-shadow: 0 2px 5px rgba(70, 73, 170, .18); }
+    .encouragement-cta { flex: 0 0 auto; min-width: 270px; padding: 10px 18px; border: 1px solid var(--teams); border-radius: 6px; color: #fff; background: var(--teams); text-align: center; font-size: 13px; font-weight: 700; text-decoration: none; box-shadow: 0 2px 5px rgba(70, 73, 170, .18); }
     .encouragement-cta:hover { background: var(--teams-dark); }
     .encouragement-details { display: grid; grid-template-columns: 1.15fr .65fr 1.55fr; gap: 8px; }
     .encouragement-detail { min-width: 0; padding: 10px 12px; border-radius: 6px; background: #f7f7fb; }
-    .encouragement-detail.deadline { color: #fff; background: var(--teams); }
+    .encouragement-detail.prize { border: 1px solid #e0ad00; background: #fff3bf; }
     .encouragement-label { display: block; margin-bottom: 3px; color: var(--teams); font-size: 10px; font-weight: 700; letter-spacing: .03em; }
-    .encouragement-detail.deadline .encouragement-label { color: rgba(255,255,255,.82); }
+    .encouragement-detail.prize .encouragement-label { color: #765a00; }
     .encouragement-detail strong { display: block; font-size: 13px; line-height: 1.45; }
     .encouragement-detail p { margin: 0; color: #4f4f58; font-size: 11px; line-height: 1.55; }
-    .encouragement-detail.deadline strong { color: #fff; font-size: 15px; }
 
     .section { padding: 0 0 22px; margin: 0 0 22px; border-bottom: 1px solid var(--line); }
     .section:last-of-type { margin-bottom: 18px; }
@@ -169,7 +168,7 @@
       .form-card, .preview-body { padding: 15px; }
       .grid-2 { grid-template-columns: 1fr; }
       .encouragement-top { display: block; }
-      .encouragement-cta { display: block; margin-top: 10px; }
+      .encouragement-cta { display: block; min-width: 0; margin-top: 10px; }
       .encouragement-details { grid-template-columns: 1fr; }
       .next-links { grid-template-columns: 1fr; }
       .segmented label { min-height: 60px; }
@@ -212,21 +211,21 @@
           <section class="encouragement" aria-labelledby="encouragementTitle">
             <div class="encouragement-top">
               <div>
-                <h2 id="encouragementTitle">小さな取り組みも、気軽にエントリーしてください</h2>
+                <h2 id="encouragementTitle">どんなに小さなエピソードも、残す価値があります。気軽にエントリーしてください</h2>
                 <p class="encouragement-lead">自薦・他薦どちらもOK。短い質問に答えるだけで、応募文を作成できます。</p>
               </div>
-              <a class="encouragement-cta" href="#entryForm">入力を始める</a>
+              <a class="encouragement-cta" href="#entryForm">入力ツールで、もっと気軽にエントリー</a>
             </div>
             <div class="encouragement-details" aria-label="応募例、締切、表彰・副賞">
               <div class="encouragement-detail">
                 <span class="encouragement-label">応募できる例</span>
                 <p>資料を見やすくした／確認の手間を減らした／忙しい仲間をサポートした</p>
               </div>
-              <div class="encouragement-detail deadline">
+              <div class="encouragement-detail">
                 <span class="encouragement-label">応募締切</span>
                 <strong>2026年9月30日（水）</strong>
               </div>
-              <div class="encouragement-detail">
+              <div class="encouragement-detail prize">
                 <span class="encouragement-label">KPI・バックオフィス部門　表彰・副賞</span>
                 <p>表彰バッジ／グランプリ：ホテル宿泊体験（10万円相当）／準グランプリ：お食事券（5万円相当）</p>
               </div>
