@@ -10,7 +10,7 @@
   const recommendationAnswer = $('#recommendationAnswer');
   const copyBtn = $('#copyBtn');
   const downloadBtn = $('#downloadBtn');
-  const officialLink = $('#officialLink');
+  const applicationLink = $('#applicationLink');
   const missingEl = $('#missing');
   const toast = $('#toast');
   let currentAnswers = { success: '', result: '', recommendation: '' };
@@ -207,8 +207,9 @@
     const ready = readiness.every(Boolean);
     copyBtn.disabled = !ready;
     downloadBtn.disabled = !ready;
-    officialLink.classList.toggle('disabled', !ready);
-    officialLink.setAttribute('aria-disabled', String(!ready));
+    applicationLink.classList.toggle('disabled', !ready);
+    applicationLink.setAttribute('aria-disabled', String(!ready));
+    applicationLink.tabIndex = ready ? 0 : -1;
 
     const tips = [];
     if (!value('period')) tips.push('取り組んだ時期');
@@ -329,6 +330,9 @@
   });
   copyBtn.addEventListener('click', () => copyText(combinedDraft(), 'すべての回答をコピーしました。'));
   downloadBtn.addEventListener('click', downloadDraft);
+  applicationLink.addEventListener('click', (event) => {
+    if (applicationLink.getAttribute('aria-disabled') === 'true') event.preventDefault();
+  });
   $('#sampleBtn').addEventListener('click', fillSample);
   $('#resetBtn').addEventListener('click', () => {
     if (!confirm('入力内容をすべて消去しますか？')) return;
