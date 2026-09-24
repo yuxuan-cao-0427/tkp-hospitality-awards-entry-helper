@@ -36,7 +36,7 @@
       outline-offset: 2px;
     }
 
-    .teams-window { width: 100%; max-width: 1100px; min-height: 100vh; margin: 0 auto; background: var(--canvas); }
+    .teams-window { width: 100%; max-width: 1200px; min-height: 100vh; margin: 0 auto; background: var(--canvas); }
     .app-shell { min-width: 0; }
     .app-header {
       display: flex;
@@ -150,6 +150,12 @@
     .next-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
     .button-link { width: 100%; color: #fff; border: 1px solid var(--teams); background: var(--teams); }
     .submit-box .button-link { min-height: 44px; box-shadow: 0 2px 5px rgba(70, 73, 170, .18); }
+    .button-link.official-page { border-color: var(--teams); background: var(--teams); }
+    .button-link.official-page:hover { border-color: var(--teams-dark); background: var(--teams-dark); }
+    .button-link.entry-sheet { border-color: #2d6fa8; background: #2d6fa8; }
+    .button-link.entry-sheet:hover { border-color: #245b8a; background: #245b8a; }
+    .button-link.entry-submit { border-color: #237b4b; background: #237b4b; }
+    .button-link.entry-submit:hover { border-color: #1b633c; background: #1b633c; }
     .button-link.disabled { pointer-events: none; opacity: .48; }
     .footer-tools { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-top: 14px; color: var(--muted); font-size: 11px; }
     .link-button { padding: 0; border: 0; color: var(--teams); background: none; text-decoration: none; cursor: pointer; }
@@ -204,9 +210,9 @@
             <h3>公式応募リンク</h3>
             <p>公式ページで募集要項を確認し、必要に応じてエントリーシートをダウンロードしてください。回答文を作成してコピーしたら、応募フォームから送信できます。</p>
             <div class="next-links">
-              <a class="button-link" href="https://tkpjp.sharepoint.com/SitePages/KPI%E3%83%BB%E3%83%90%E3%83%83%E3%82%AF%E5%BE%A1%E3%83%95.aspx" target="_blank" rel="noopener">公式ページを確認する</a>
-              <a class="button-link" href="https://tkpjp.sharepoint.com/:x:/s/project_21-1-proj-4_/IQCFz15e3lgLRYlwjrHpzmfXAZkjul9-IZf8GjoQkVEUIDg?e=CyFMEV" target="_blank" rel="noopener">エントリーシートを開く・ダウンロード</a>
-              <a class="button-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=uCwrvWjF302i7GVeLBECK0tQbmb2YM1EmJ0_PFKJaKJUOUJRTzNPNVQ0WTJBS0U5UVBGQkNGQ1dJTyQlQCN0PWcu" target="_blank" rel="noopener">応募フォームから送信する</a>
+              <a class="button-link official-page" href="https://tkpjp.sharepoint.com/SitePages/KPI%E3%83%BB%E3%83%90%E3%83%83%E3%82%AF%E5%BE%A1%E3%83%95.aspx" target="_blank" rel="noopener">公式ページを確認する</a>
+              <a class="button-link entry-sheet" href="https://tkpjp.sharepoint.com/:x:/s/project_21-1-proj-4_/IQCFz15e3lgLRYlwjrHpzmfXAZkjul9-IZf8GjoQkVEUIDg?e=CyFMEV" target="_blank" rel="noopener">エントリーシートを開く・ダウンロード</a>
+              <a class="button-link entry-submit" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=uCwrvWjF302i7GVeLBECK0tQbmb2YM1EmJ0_PFKJaKJUOUJRTzNPNVQ0WTJBS0U5UVBGQkNGQ1dJTyQlQCN0PWcu" target="_blank" rel="noopener">応募フォームから送信する</a>
             </div>
           </section>
 
