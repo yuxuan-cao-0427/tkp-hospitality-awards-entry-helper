@@ -72,6 +72,16 @@
     .preview-head p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
     .preview-body { padding: 18px; }
 
+    .encouragement { margin: 0 0 24px; padding: 18px; border: 2px solid #d6d7f4; border-radius: 10px; background: #fafaff; }
+    .encouragement h2 { margin: 0 0 7px; color: var(--teams-dark); font-size: 19px; line-height: 1.45; }
+    .encouragement-lead { margin: 0 0 14px; color: #3f3f48; font-size: 13px; line-height: 1.75; }
+    .encouragement-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .encouragement-item { padding: 13px 14px; border-radius: 7px; }
+    .encouragement-item strong { display: block; margin-bottom: 4px; font-size: 13px; }
+    .encouragement-item p { margin: 0; color: #4f4f58; font-size: 12px; line-height: 1.65; }
+    .encouragement-item.praise { border-left: 4px solid #c48600; background: #fff8df; }
+    .encouragement-item.support { border-left: 4px solid var(--teams); background: var(--teams-pale); }
+
     .section { padding: 0 0 22px; margin: 0 0 22px; border-bottom: 1px solid var(--line); }
     .section:last-of-type { margin-bottom: 18px; }
     .section-title { display: flex; gap: 10px; align-items: center; margin: 0 0 15px; font-size: 17px; font-weight: 600; }
@@ -150,6 +160,7 @@
       .work-area { padding: 10px 10px 28px; }
       .form-card, .preview-body { padding: 15px; }
       .grid-2 { grid-template-columns: 1fr; }
+      .encouragement-grid { grid-template-columns: 1fr; }
       .next-links { grid-template-columns: 1fr; }
       .segmented label { min-height: 60px; }
       .footer-tools { flex-wrap: wrap; }
@@ -193,6 +204,21 @@
           </div>
 
           <form id="entryForm" class="card form-card entry-surface" novalidate>
+        <section class="encouragement" aria-labelledby="encouragementTitle">
+          <h2 id="encouragementTitle">あなたの取り組みを、ぜひエントリーしてください</h2>
+          <p class="encouragement-lead">日々の小さな工夫、仲間への声かけ、業務を少し良くした行動も、私たちが称えたい大切な貢献です。「これくらい」と思わず、自薦・他薦を問わず積極的にエントリーしてください。</p>
+          <div class="encouragement-grid">
+            <div class="encouragement-item praise">
+              <strong>小さな貢献も、称えたい取り組みです</strong>
+              <p>目立つ成果だけでなく、周囲を助けた行動や日常の改善も立派なエピソードです。ぜひ教えてください。</p>
+            </div>
+            <div class="encouragement-item support">
+              <strong>このツールが応募の負担を減らします</strong>
+              <p>短い質問に答えるだけで応募文を整理できます。文章を一から考えず、気軽にエントリーするためのサポートツールです。</p>
+            </div>
+          </div>
+        </section>
+
         <section class="section">
           <h2 class="section-title"><span class="step">1</span>応募方法を選ぶ</h2>
           <div class="segmented" role="radiogroup" aria-label="応募方法">
