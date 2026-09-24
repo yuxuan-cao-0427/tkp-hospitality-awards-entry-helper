@@ -72,7 +72,7 @@
     .preview-head p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
     .preview-body { padding: 18px; }
 
-    .encouragement { margin: 0 0 24px; padding: 18px; border: 2px solid #d6d7f4; border-radius: 10px; background: #fafaff; }
+    .encouragement { grid-column: 1 / -1; padding: 18px; border: 2px solid #d6d7f4; border-radius: 10px; background: #fafaff; }
     .encouragement h2 { margin: 0 0 7px; color: var(--teams-dark); font-size: 19px; line-height: 1.45; }
     .encouragement-lead { margin: 0 0 14px; color: #3f3f48; font-size: 13px; line-height: 1.75; }
     .encouragement-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -81,6 +81,11 @@
     .encouragement-item p { margin: 0; color: #4f4f58; font-size: 12px; line-height: 1.65; }
     .encouragement-item.praise { border-left: 4px solid #c48600; background: #fff8df; }
     .encouragement-item.support { border-left: 4px solid var(--teams); background: var(--teams-pale); }
+    .award-summary { display: grid; grid-template-columns: minmax(190px, .55fr) minmax(0, 1.45fr); gap: 10px; margin-top: 10px; }
+    .award-summary-item { padding: 13px 14px; border: 1px solid #dcdce8; border-radius: 7px; background: #fff; }
+    .award-summary-label { display: block; margin-bottom: 5px; color: var(--teams); font-size: 11px; font-weight: 700; letter-spacing: .03em; }
+    .award-summary-item strong { display: block; color: #30303a; font-size: 14px; }
+    .award-summary-item p { margin: 5px 0 0; color: #4f4f58; font-size: 12px; line-height: 1.65; }
 
     .section { padding: 0 0 22px; margin: 0 0 22px; border-bottom: 1px solid var(--line); }
     .section:last-of-type { margin-bottom: 18px; }
@@ -148,6 +153,7 @@
     .footer-tools { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-top: 14px; color: var(--muted); font-size: 11px; }
     .link-button { padding: 0; border: 0; color: var(--teams); background: none; text-decoration: none; cursor: pointer; }
     .link-button:hover { text-decoration: underline; }
+    .quick-start { margin: 0 0 16px; }
 
     @media (max-width: 1050px) {
       .work-area { grid-template-columns: 1fr; }
@@ -161,6 +167,7 @@
       .form-card, .preview-body { padding: 15px; }
       .grid-2 { grid-template-columns: 1fr; }
       .encouragement-grid { grid-template-columns: 1fr; }
+      .award-summary { grid-template-columns: 1fr; }
       .next-links { grid-template-columns: 1fr; }
       .segmented label { min-height: 60px; }
       .footer-tools { flex-wrap: wrap; }
@@ -199,25 +206,40 @@
             </div>
           </section>
 
+          <section class="encouragement" aria-labelledby="encouragementTitle">
+            <h2 id="encouragementTitle">あなたの取り組みを、ぜひエントリーしてください</h2>
+            <p class="encouragement-lead">日々の小さな工夫、仲間への声かけ、業務を少し良くした行動も、私たちが称えたい大切な貢献です。「これくらい」と思わず、自薦・他薦を問わず積極的にエントリーしてください。</p>
+            <div class="encouragement-grid">
+              <div class="encouragement-item praise">
+                <strong>小さな貢献も、称えたい取り組みです</strong>
+                <p>目立つ成果だけでなく、周囲を助けた行動や日常の改善も立派なエピソードです。ぜひ教えてください。</p>
+              </div>
+              <div class="encouragement-item support">
+                <strong>このツールが応募の負担を減らします</strong>
+                <p>短い質問に答えるだけで応募文を整理できます。文章を一から考えず、気軽にエントリーするためのサポートツールです。</p>
+              </div>
+            </div>
+            <div class="award-summary" aria-label="応募締切と表彰・副賞">
+              <div class="award-summary-item">
+                <span class="award-summary-label">応募締切</span>
+                <strong>2026年9月30日（水）</strong>
+              </div>
+              <div class="award-summary-item">
+                <span class="award-summary-label">KPI・バックオフィス部門　表彰・副賞</span>
+                <strong>表彰バッジ</strong>
+                <p>グランプリ（1名）：当社運営以外のホテル宿泊体験（10万円相当）<br>準グランプリ（2名）：高級レストランでのお食事券（5万円相当）</p>
+              </div>
+            </div>
+          </section>
+
           <div class="notice">
             <div><strong>入力内容はこの端末内だけに保存されます。</strong> 内容を確認してから、公式応募フォームへコピーしてください。AIや外部サーバーには送信しません。</div>
           </div>
 
           <form id="entryForm" class="card form-card entry-surface" novalidate>
-        <section class="encouragement" aria-labelledby="encouragementTitle">
-          <h2 id="encouragementTitle">あなたの取り組みを、ぜひエントリーしてください</h2>
-          <p class="encouragement-lead">日々の小さな工夫、仲間への声かけ、業務を少し良くした行動も、私たちが称えたい大切な貢献です。「これくらい」と思わず、自薦・他薦を問わず積極的にエントリーしてください。</p>
-          <div class="encouragement-grid">
-            <div class="encouragement-item praise">
-              <strong>小さな貢献も、称えたい取り組みです</strong>
-              <p>目立つ成果だけでなく、周囲を助けた行動や日常の改善も立派なエピソードです。ぜひ教えてください。</p>
-            </div>
-            <div class="encouragement-item support">
-              <strong>このツールが応募の負担を減らします</strong>
-              <p>短い質問に答えるだけで応募文を整理できます。文章を一から考えず、気軽にエントリーするためのサポートツールです。</p>
-            </div>
-          </div>
-        </section>
+        <div class="quick-start">
+          <button class="link-button" type="button" id="sampleBtn">入力例で試す</button>
+        </div>
 
         <section class="section">
           <h2 class="section-title"><span class="step">1</span>応募方法を選ぶ</h2>
@@ -324,7 +346,6 @@
         <button class="primary" type="button" id="composeBtn">回答を応募文にまとめる</button>
         <div class="footer-tools">
           <span id="saveState">入力内容は自動保存されます</span>
-          <button class="link-button" type="button" id="sampleBtn">入力例で試す</button>
           <button class="link-button" type="button" id="resetBtn">すべて消去</button>
         </div>
       </form>
