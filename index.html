@@ -129,10 +129,10 @@
     .missing strong { display: block; margin-bottom: 3px; color: #433a16; }
     .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
     .toast { min-height: 21px; margin-top: 6px; color: var(--success); text-align: center; font-size: 12px; font-weight: 600; }
-    .submit-box { margin-top: 15px; padding: 13px; border-radius: 7px; background: #f6f6fa; }
+    .submit-box { grid-column: 1 / -1; padding: 16px; background: #f6f6fa; }
     .submit-box h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; }
     .submit-box p { margin: 0 0 9px; color: var(--muted); font-size: 11px; }
-    .next-links { display: grid; gap: 8px; }
+    .next-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
     .button-link { width: 100%; color: #fff; border: 1px solid var(--teams); background: var(--teams); }
     .button-link.outline { color: var(--teams); background: #fff; }
     .button-link.outline:hover { color: #fff; }
@@ -152,6 +152,7 @@
       .work-area { padding: 10px 10px 28px; }
       .form-card, .preview-body { padding: 15px; }
       .grid-2, .actions { grid-template-columns: 1fr; }
+      .next-links { grid-template-columns: 1fr; }
       .segmented label { min-height: 60px; }
       .footer-tools { flex-wrap: wrap; }
     }
@@ -179,6 +180,16 @@
         </div>
 
         <main class="work-area">
+          <section class="card submit-box" aria-label="応募関連リンク">
+            <h3>応募の案内・エントリーシート・送信</h3>
+            <p>公式ページで募集要項を確認し、必要に応じてエントリーシートをダウンロードしてください。回答文を作成してコピーしたら、応募フォームから送信できます。</p>
+            <div class="next-links">
+              <a class="button-link outline" href="https://tkpjp.sharepoint.com/SitePages/KPI%E3%83%BB%E3%83%90%E3%83%83%E3%82%AF%E5%BE%A1%E3%83%95.aspx" target="_blank" rel="noopener">📄 公式ページを確認する ↗</a>
+              <a class="button-link outline" href="https://tkpjp.sharepoint.com/:x:/s/project_21-1-proj-4_/IQCFz15e3lgLRYlwjrHpzmfXAZkjul9-IZf8GjoQkVEUIDg?e=CyFMEV" target="_blank" rel="noopener">⬇ エントリーシートを開く・ダウンロード ↗</a>
+              <a class="button-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=uCwrvWjF302i7GVeLBECK0tQbmb2YM1EmJ0_PFKJaKJUOUJRTzNPNVQ0WTJBS0U5UVBGQkNGQ1dJTyQlQCN0PWcu" target="_blank" rel="noopener">✉ 応募フォームから送信する ↗</a>
+            </div>
+          </section>
+
           <div class="notice">
             <span>ⓘ</span>
             <div><strong>入力内容はこの端末内だけに保存されます。</strong> 内容を確認してから、公式応募フォームへコピーしてください。AIや外部サーバーには送信しません。</div>
@@ -339,15 +350,6 @@
           </div>
           <div id="toast" class="toast" role="status"></div>
 
-          <div class="submit-box">
-            <h3>応募の案内・エントリーシート・送信</h3>
-            <p>公式ページで募集要項を確認し、必要に応じてエントリーシートをダウンロードしてください。回答文が完成したら応募フォームから送信できます。</p>
-            <div class="next-links">
-              <a class="button-link outline" href="https://tkpjp.sharepoint.com/SitePages/KPI%E3%83%BB%E3%83%90%E3%83%83%E3%82%AF%E5%BE%A1%E3%83%95.aspx" target="_blank" rel="noopener">📄 公式ページを確認する ↗</a>
-              <a class="button-link outline" href="https://tkpjp.sharepoint.com/:x:/s/project_21-1-proj-4_/IQCFz15e3lgLRYlwjrHpzmfXAZkjul9-IZf8GjoQkVEUIDg?e=CyFMEV" target="_blank" rel="noopener">⬇ エントリーシートを開く・ダウンロード ↗</a>
-              <a id="applicationLink" class="button-link disabled" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=uCwrvWjF302i7GVeLBECK0tQbmb2YM1EmJ0_PFKJaKJUOUJRTzNPNVQ0WTJBS0U5UVBGQkNGQ1dJTyQlQCN0PWcu" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">✉ 応募フォームから送信する ↗</a>
-            </div>
-          </div>
         </div>
           </aside>
         </main>
